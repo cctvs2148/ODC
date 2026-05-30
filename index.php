@@ -42,7 +42,11 @@ $companyName = get_site_setting('company_name', 'ODC Student Hotel Duty Manageme
                 <button type="submit" class="btn btn-danger w-100">Login</button>
             </form>
             <div class="mt-3 d-flex justify-content-between align-items-center">
+<<<<<<< HEAD
                 <a href="/ODC/forgot_password.php" class="small"></a>
+=======
+                <a href="/ODC/forgot_password.php" class="small">Forgot Password?</a>
+>>>>>>> 9a9be06faba99a46e49e5a8fb5818e8885f93e38
                 <span class="text-muted small">Role-based dashboard access for Admin, Placement Head, Student, Manager, Hotelier.</span>
             </div>
         </div>

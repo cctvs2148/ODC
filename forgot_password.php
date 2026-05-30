@@ -40,7 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Forgot Password - ODC</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/ODC/assets/css/style.css" rel="stylesheet" />
+<<<<<<< HEAD
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+=======
+>>>>>>> 9a9be06faba99a46e49e5a8fb5818e8885f93e38
 </head>
 <body class="login-page d-flex align-items-center justify-content-center min-vh-100 bg-light">
     <div class="card shadow-sm rounded-4 login-card">
