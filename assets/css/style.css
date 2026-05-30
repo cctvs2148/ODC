@@ -32,6 +32,13 @@ body, html {
 .sidebar-brand {
     border-bottom: 1px solid rgba(255,255,255,.15);
 }
+.sidebar-logo {
+    max-width: 130px;
+    max-height: 70px;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255,255,255,0.35);
+}
 .text-yellow {
     color: var(--secondary) !important;
 }

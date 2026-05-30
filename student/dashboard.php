@@ -18,6 +18,7 @@ $vacancies = $pdo->query('SELECT COUNT(*) FROM vacancies WHERE available_vacanci
 $notifications = $pdo->prepare('SELECT a.*, v.duty_date, v.shift_type, h.name AS hotel_name FROM applications a JOIN vacancies v ON a.vacancy_id = v.id JOIN hotels h ON v.hotel_id = h.id WHERE a.student_id = ? ORDER BY a.apply_date DESC LIMIT 5');
 $notifications->execute([$studentId]);
 $notificationsData = $notifications->fetchAll();
+$announcements = get_announcements();
 ?>
 <?php require_once __DIR__ . '/../includes/header.php'; ?>
 <?php render_sidebar($_SESSION['role'], '/ODC/student/dashboard.php'); ?>
@@ -28,6 +29,36 @@ $notificationsData = $notifications->fetchAll();
     <div class="col-md-3"><div class="card shadow-sm"><div class="card-body"><h6 class="text-muted">Manager Approved</h6><h2 class="text-danger"><?= $approvedCount ?></h2></div></div></div>
     <div class="col-md-3"><div class="card shadow-sm"><div class="card-body"><h6 class="text-muted">Confirmed</h6><h2 class="text-danger"><?= $confirmedCount ?></h2></div></div></div>
 </div>
+<?php if (count($announcements) > 0): ?>
+<div class="card shadow-sm mt-4">
+    <div class="card-header bg-secondary text-dark">Announcements</div>
+    <div class="card-body">
+        <div id="studentAnnouncements" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <?php foreach ($announcements as $index => $announcement): ?>
+                <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+                    <?php if (!empty($announcement['image'])): ?>
+                        <img src="<?= htmlspecialchars($announcement['image']) ?>" class="d-block w-100 rounded mb-3" alt="<?= htmlspecialchars($announcement['title']) ?>" style="max-height:260px; object-fit:cover;" />
+                    <?php endif; ?>
+                    <h5><?= htmlspecialchars($announcement['title']) ?></h5>
+                    <p class="mb-0 text-muted"><?= nl2br(htmlspecialchars($announcement['message'])) ?></p>
+                </div>
+                <?php endforeach; ?>
+            </div>
+            <?php if (count($announcements) > 1): ?>
+            <button class="carousel-control-prev" type="button" data-bs-target="#studentAnnouncements" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#studentAnnouncements" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
 <div class="card shadow-sm mt-4">
     <div class="card-header bg-danger text-white">Application Status</div>
     <div class="card-body">
