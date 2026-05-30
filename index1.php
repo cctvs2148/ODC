@@ -17,8 +17,7 @@ $companyName = get_site_setting('company_name', 'ODC Student Hotel Duty Manageme
     <title>ODC Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/ODC/assets/css/style.css" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="/ODC/assets/img/favicon.ico">
-    </head>
+</head>
 <body class="login-page d-flex align-items-center justify-content-center min-vh-100 bg-light">
     <div class="card shadow-sm rounded-4 login-card">
         <div class="card-body p-4 text-center">
@@ -42,7 +41,7 @@ $companyName = get_site_setting('company_name', 'ODC Student Hotel Duty Manageme
                 <button type="submit" class="btn btn-danger w-100">Login</button>
             </form>
             <div class="mt-3 d-flex justify-content-between align-items-center">
-                <a href="/ODC/forgot_password.php" class="small"></a>
+                <a href="/ODC/forgot_password.php" class="small">Forgot Password?</a>
                 <span class="text-muted small">Role-based dashboard access for Admin, Placement Head, Student, Manager, Hotelier.</span>
             </div>
         </div>

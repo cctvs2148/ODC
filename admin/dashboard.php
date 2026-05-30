@@ -13,6 +13,7 @@ $applications = count_table('applications');
 $pending = $pdo->query('SELECT COUNT(*) FROM applications WHERE manager_status = "pending"')->fetchColumn();
 $approved = $pdo->query('SELECT COUNT(*) FROM applications WHERE manager_status = "approved" AND hotel_status = "pending"')->fetchColumn();
 $confirmed = $pdo->query('SELECT COUNT(*) FROM applications WHERE final_status = "confirmed"')->fetchColumn();
+$activeAnnouncements = get_announcements();
 ?>
 <?php require_once __DIR__ . '/../includes/header.php'; ?>
 <?php render_sidebar($_SESSION['role'], '/ODC/admin/dashboard.php'); ?>
@@ -81,6 +82,30 @@ $confirmed = $pdo->query('SELECT COUNT(*) FROM applications WHERE final_status =
             <div class="card-body">
                 <h6 class="text-muted">Confirmed</h6>
                 <h2 class="text-danger"><?= $confirmed ?></h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row g-4 mt-3">
+    <div class="col-md-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-secondary text-dark">Active News / Announcements</div>
+            <div class="card-body">
+                <?php if (count($activeAnnouncements) === 0): ?>
+                    <div class="text-muted">No active announcements. Add news from the Announcements menu.</div>
+                <?php else: ?>
+                    <ul class="list-group">
+                        <?php foreach ($activeAnnouncements as $announcement): ?>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong><?= htmlspecialchars($announcement['title']) ?></strong>
+                                <div class="small text-muted"><?= htmlspecialchars(substr($announcement['message'], 0, 120)) ?><?= strlen($announcement['message']) > 120 ? '...' : '' ?></div>
+                            </div>
+                            <span class="badge bg-success"><?= htmlspecialchars($announcement['status']) ?></span>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
             </div>
         </div>
     </div>

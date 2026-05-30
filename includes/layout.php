@@ -3,6 +3,8 @@ if (!defined('APP_INIT')) {
     exit;
 }
 function render_sidebar($role, $active = '') {
+    $logo = function_exists('get_site_setting') ? get_site_setting('company_logo') : null;
+    $brand = function_exists('get_site_setting') ? get_site_setting('company_name', 'ODC Hotel Duty') : 'ODC Hotel Duty';
     $menu = [
         'admin' => [
             ['url' => '/ODC/admin/dashboard.php', 'icon' => 'bi-speedometer2', 'label' => 'Dashboard'],
@@ -11,6 +13,8 @@ function render_sidebar($role, $active = '') {
             ['url' => '/ODC/admin/manage_placement.php', 'icon' => 'bi-building', 'label' => 'Placement Heads'],
             ['url' => '/ODC/admin/manage_hotels.php', 'icon' => 'bi-house', 'label' => 'Hotels'],
             ['url' => '/ODC/admin/view_applications.php', 'icon' => 'bi-list-check', 'label' => 'Applications'],
+            ['url' => '/ODC/admin/announcements.php', 'icon' => 'bi-bell', 'label' => 'Announcements'],
+            ['url' => '/ODC/admin/settings.php', 'icon' => 'bi-gear', 'label' => 'Branding'],
             ['url' => '/ODC/admin/analytics.php', 'icon' => 'bi-bar-chart', 'label' => 'Analytics'],
         ],
         'placement' => [
@@ -22,6 +26,7 @@ function render_sidebar($role, $active = '') {
             ['url' => '/ODC/student/dashboard.php', 'icon' => 'bi-speedometer2', 'label' => 'Dashboard'],
             ['url' => '/ODC/student/vacancies.php', 'icon' => 'bi-list', 'label' => 'Vacancies'],
             ['url' => '/ODC/student/applications.php', 'icon' => 'bi-file-earmark-text', 'label' => 'My Applications'],
+            ['url' => '/ODC/student/profile.php', 'icon' => 'bi-person', 'label' => 'My Profile'],
         ],
         'manager' => [
             ['url' => '/ODC/manager/dashboard.php', 'icon' => 'bi-speedometer2', 'label' => 'Dashboard'],
@@ -34,7 +39,12 @@ function render_sidebar($role, $active = '') {
     ];
     $items = $menu[$role] ?? [];
     echo '<aside class="sidebar bg-danger text-white p-3">';
-    echo '<div class="sidebar-brand mb-4"><h4 class="text-yellow mb-0">ODC Hotel Duty</h4></div>';
+    echo '<div class="sidebar-brand mb-4 text-center">';
+    if (!empty($logo)) {
+        echo '<img src="' . htmlspecialchars($logo) . '" alt="Logo" class="sidebar-logo mb-2" />';
+    }
+    echo '<h4 class="text-yellow mb-0">' . htmlspecialchars($brand) . '</h4>';
+    echo '</div>';
     foreach ($items as $item) {
         $activeClass = $active === $item['url'] ? 'active' : '';
         echo '<a href="' . $item['url'] . '" class="sidebar-link d-flex align-items-center justify-content-between px-3 py-2 mb-1 rounded ' . $activeClass . '">';
